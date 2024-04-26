@@ -10,7 +10,7 @@ from torchvision.ops.boxes import batched_nms, box_area  # type: ignore
 
 from typing import Any, Dict, List, Optional, Tuple
 
-from .modeling import Sam
+
 from .predictor import SamPredictor
 from .utils.amg import (
     MaskData,
@@ -35,7 +35,7 @@ from .utils.amg import (
 class SamAutomaticMaskGenerator:
     def __init__(
         self,
-        model: Sam,
+        model,
         points_per_side: Optional[int] = 32,
         points_per_batch: int = 64,
         pred_iou_thresh: float = 0.88,
