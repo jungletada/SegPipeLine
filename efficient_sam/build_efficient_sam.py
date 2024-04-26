@@ -6,6 +6,7 @@
 
 from .modeling.efficient_sam import build_efficient_sam
 
+
 def build_efficient_sam_vit_ti(checkpoint="weights/efficient_sam_vitt.pt"):
     return build_efficient_sam(
         encoder_patch_embed_dim=192,

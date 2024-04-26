@@ -17,7 +17,6 @@ from .efficient_sam_encoder import ImageEncoderViT
 from .two_way_transformer import TwoWayAttentionBlock, TwoWayTransformer
 
 
-
 class EfficientSam(nn.Module):
     mask_threshold: float = 0.0
     image_format: str = "RGB"
@@ -204,7 +203,7 @@ class EfficientSam(nn.Module):
           batched_point_labels: A tensor of shape [B, num_queries, max_num_pts]
 
         Returns:
-          A list tuples of two tensors where the ith element is by considering the first i+1 points.
+          A list tuples of two tensors where the i-th element is by considering the first i+1 points.
             low_res_mask: A tensor of shape [B, 256, 256] of predicted masks
             iou_predictions: A tensor of shape [B, max_num_queries] of estimated IOU scores
         """
