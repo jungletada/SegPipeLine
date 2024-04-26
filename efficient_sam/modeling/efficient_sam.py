@@ -16,6 +16,8 @@ from .efficient_sam_decoder import MaskDecoder, PromptEncoder
 from .efficient_sam_encoder import ImageEncoderViT
 from .two_way_transformer import TwoWayAttentionBlock, TwoWayTransformer
 
+
+
 class EfficientSam(nn.Module):
     mask_threshold: float = 0.0
     image_format: str = "RGB"
@@ -52,6 +54,10 @@ class EfficientSam(nn.Module):
         self.register_buffer(
             "pixel_std", torch.Tensor(pixel_std).view(1, 3, 1, 1), False
         )
+    
+    @property
+    def device(self) -> Any:
+        return self.pixel_mean.device
 
     @torch.jit.export
     def predict_masks(
