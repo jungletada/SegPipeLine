@@ -11,11 +11,11 @@ Online demo and examples can be found in the [project page](https://yformer.gith
 
 ## Model
 EfficientSAM checkpoints are available under the weights folder of this github repository. Example instantiations and run of the models can be found in [EfficientSAM_example.py](https://github.com/yformer/EfficientSAM/blob/main/EfficientSAM_example.py).
-
+模型权重需创建`weights`文件夹，其内容和原始的Efficient中的权重保持一致
 | EfficientSAM-S | EfficientSAM-Ti |
 |------------------------------|------------------------------|
 | [Download](https://github.com/yformer/EfficientSAM/blob/main/weights/efficient_sam_vits.pt.zip) |[Download](https://github.com/yformer/EfficientSAM/blob/main/weights/efficient_sam_vitt.pt)|
-模型权重需创建`weights`文件夹，其内容和原始的Efficient中的权重保持一致
+
 You can directly use EfficientSAM with checkpoints,
 ```
 from efficient_sam.build_efficient_sam import build_efficient_sam_vitt, build_efficient_sam_vits
