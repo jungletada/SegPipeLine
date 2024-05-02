@@ -21,7 +21,7 @@ model = efficient_sam_model_registry[model_type]()
 example_img_path = 'figs/examples'
 output_img_path = 'figs/outputs'
 
-img_name = 'motor-rotate.png'
+img_name = 'motor.jpg'
 img_name_no_ext = re.sub(r'\.[^.]*$', '', img_name)
 
 sample_image_np = cv2.imread(osp.join(example_img_path, img_name))
@@ -49,7 +49,7 @@ def run_points_sample():
         对于这个演示，我们使用第一个掩码
     """
     plt.cla()
-    input_points = torch.tensor([[[[400, 160], [200, 360]]]])
+    input_points = torch.tensor([[[[200, 330], [600, 200]]]])
     input_labels = torch.tensor([[[1, 1]]])
 
     plt.figure(figsize=(10,10))
@@ -71,10 +71,10 @@ def run_points_sample():
         predicted_logits, sorted_ids[..., None, None], dim=2
     )
     mask = torch.ge(predicted_logits[0, 0, 0, :, :], 0).cpu().detach().numpy()
-    binary_image = np.where(mask, 255, 0).astype(np.uint8)
-    cv2.imwrite(osp.join(output_img_path, 
-                         f"{img_name_no_ext}_{model_type}_pts_mask_binary.png"), 
-                binary_image)
+    # binary_image = np.where(mask, 255, 0).astype(np.uint8)
+    # cv2.imwrite(osp.join(output_img_path, 
+    #                      f"{img_name_no_ext}_{model_type}_pts_mask_binary.png"), 
+    #             binary_image)
     # plt.cla()
     # plt.figure(figsize=(10, 10))
     # plt.imshow(sample_image_np)
@@ -83,8 +83,8 @@ def run_points_sample():
     # plt.axis('off')
     # plt.savefig(osp.join(output_img_path, f'{img_name_no_ext}_{model_type}_pts_mask.png'))
     
-    # save_transparent_img(sample_image_np, mask, 
-    #                     save_path=osp.join(output_img_path, f"{img_name_no_ext}_{model_type}_pts_mask_BGRA.png"))
+    save_transparent_img(sample_image_np, mask, 
+                        save_path=osp.join(output_img_path, f"{img_name_no_ext}_{model_type}_pts_mask_BGRA.png"))
     
     # save_transparent_image_with_border(sample_image_np, mask, 
     #                               save_path=osp.join(output_img_path, f"{img_name_no_ext}_{model_type}_pts_mask_BGRA_cropped.png"))
