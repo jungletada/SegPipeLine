@@ -21,7 +21,7 @@ model = efficient_sam_model_registry[model_type]()
 example_img_path = 'figs/examples'
 output_img_path = 'figs/outputs'
 
-img_name = 'motor.jpg'
+img_name = 'motor-rege.png'
 img_name_no_ext = re.sub(r'\.[^.]*$', '', img_name)
 
 sample_image_np = cv2.imread(osp.join(example_img_path, img_name))
@@ -49,7 +49,7 @@ def run_points_sample():
         对于这个演示，我们使用第一个掩码
     """
     plt.cla()
-    input_points = torch.tensor([[[[200, 330], [600, 200]]]])
+    input_points = torch.tensor([[[[430, 500], [700, 380]]]])
     input_labels = torch.tensor([[[1, 1]]])
 
     plt.figure(figsize=(10,10))

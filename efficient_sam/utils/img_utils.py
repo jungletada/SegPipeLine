@@ -31,7 +31,7 @@ def save_transparent_img(sample_image_np, mask, save_path):
     # 保存为带有透明度的四通道BGRA格式：
     masked_image_np = sample_image_np.copy().astype(np.uint8)
     masked_image_np = cv2.cvtColor(masked_image_np, cv2.COLOR_RGB2BGRA)  # 转换为带有透明度的图像
-    mask = np.logical_not(mask)
+    # mask = np.logical_not(mask)
     mask = np.where(mask, 255, 0).astype(np.uint8)
     masked_image_np[:,:,3] = mask  # 设置透明度
     # 保存结果为PNG格式
