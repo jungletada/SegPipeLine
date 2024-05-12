@@ -21,7 +21,7 @@ model = efficient_sam_model_registry[model_type]()
 example_img_path = 'figs/examples'
 output_img_path = 'figs/outputs'
 
-img_name = 'remu.png'
+img_name = 'huili_shoes.png'
 img_name_no_ext = re.sub(r'\.[^.]*$', '', img_name)
 
 sample_image_np = cv2.imread(osp.join(example_img_path, img_name))
@@ -50,13 +50,9 @@ def run_points_sample():
     """
     plt.cla()
     
-    # # motor
-    # input_points = torch.tensor([[[[200, 320], [660, 60], [600, 300], [775, 475]]]])
-    # input_labels = torch.tensor([[[1, 1, 1, 0]]])
-    
     #remu
-    input_points = torch.tensor([[[[400, 700], [450, 100], [250, 480]]]])
-    input_labels = torch.tensor([[[1, 1, 1]]])
+    input_points = torch.tensor([[[[400, 200], [400, 600]]]])
+    input_labels = torch.tensor([[[1, 1]]])
     
     plt.figure(figsize=(10,10))
     plt.imshow(sample_image_np)
@@ -89,9 +85,6 @@ def run_points_sample():
     show_points(input_points.numpy(), input_labels.numpy(), plt.gca())
     plt.axis('off')
     plt.savefig(osp.join(output_img_path, f'{img_name_no_ext}_{model_type}_pts_mask.png'))
-    
-    # save_transparent_img(sample_image_np, mask, 
-    #                     save_path=osp.join(output_img_path, f"{img_name_no_ext}_{model_type}_pts_mask_BGRA.png"))
     
     save_crop_image_mask(
         sample_image_np, 
