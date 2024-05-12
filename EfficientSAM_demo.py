@@ -21,7 +21,7 @@ model = efficient_sam_model_registry[model_type]()
 example_img_path = 'figs/examples'
 output_img_path = 'figs/outputs'
 
-img_name = 'motor.jpg'
+img_name = 'remu.png'
 img_name_no_ext = re.sub(r'\.[^.]*$', '', img_name)
 
 sample_image_np = cv2.imread(osp.join(example_img_path, img_name))
@@ -49,9 +49,15 @@ def run_points_sample():
         对于这个演示，我们使用第一个掩码
     """
     plt.cla()
-    input_points = torch.tensor([[[[200, 320], [660, 60], [600, 300], [775, 475]]]])
-    input_labels = torch.tensor([[[1, 1, 1, 0]]])
-
+    
+    # # motor
+    # input_points = torch.tensor([[[[200, 320], [660, 60], [600, 300], [775, 475]]]])
+    # input_labels = torch.tensor([[[1, 1, 1, 0]]])
+    
+    #remu
+    input_points = torch.tensor([[[[400, 700], [450, 100], [250, 480]]]])
+    input_labels = torch.tensor([[[1, 1, 1]]])
+    
     plt.figure(figsize=(10,10))
     plt.imshow(sample_image_np)
     show_points(input_points.numpy(), input_labels.numpy(), plt.gca())
@@ -90,8 +96,7 @@ def run_points_sample():
     save_crop_image_mask(
         sample_image_np, 
         mask, 
-        save_path=osp.join(output_img_path, f"{img_name_no_ext}_{model_type}_pts_mask_BGRA_cropped.png"),
-        mask_path=osp.join(output_img_path, f"{img_name_no_ext}_{model_type}_pts_mask_cropped.npy"))
+        save_path=osp.join(output_img_path, f"{img_name_no_ext}_{model_type}_pts_mask_BGRA_cropped.png"))
     print(f'{model_type}推理完成')
     
 
@@ -128,8 +133,7 @@ def run_bbox_sample():
                             save_path=osp.join(output_img_path, 
                                                f"{img_name_no_ext}_{model_type}_box_mask{i}_BGRA.png"))
         save_crop_image_mask(sample_image_np, mask[i], 
-                                    save_path=osp.join(output_img_path, 
-                                                       f"{img_name_no_ext}_{model_type}_box_mask{i}_BGRA_cropped.png"))
+                             save_path=osp.join(output_img_path, f"{img_name_no_ext}_{model_type}_box_mask{i}_BGRA_cropped.png"))
     print(f'{model_type}推理完成')
     
     

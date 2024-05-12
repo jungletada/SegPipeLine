@@ -9,11 +9,9 @@ from PIL import Image
 
 
 def create_canvas_and_transform_image(img_rgba, canvas_size, scale_factor, rotation_angle, translation_xy):
-    """
-        
-    """
     H, W = canvas_size
     img_h, img_w = img_rgba.shape[:2]
+    # print(f'Image size ={img_h}x{img_w}')
     # Step 1: Create a canvas
     canvas = np.zeros((H, W, 4), dtype=np.uint8)
     # Step 2: Place img_rgba in the center of the canvas
@@ -74,22 +72,23 @@ def add_pure_background(img_add):
     
 base_path = 'figs/outputs'
 output_path = 'figs/geo_outputs'
-image_path = f'{base_path}/motor_vit_s_pts_mask_BGRA_cropped.png'
-mask_path = f'{base_path}/motor_vit_s_pts_mask_cropped.npy'
-
+img_name = 'remu' # motor
+image_path = f'{base_path}/{img_name}_vit_s_pts_mask_BGRA_cropped.png'
+# mask_path = f'{base_path}/{img_name}_vit_s_pts_mask_cropped.npy'
+# mask = np.load(mask_path) # H, W
 img_bgra = cv2.imread(image_path, cv2.IMREAD_UNCHANGED) # H, W, 4
-mask = np.load(mask_path) # H, W
+
 
 # Example usage
-canvas_size = (640, 1024)  # Example canvas size
-scale_factor = 0.7  # Example scaling factor
-rotation_angle = 15  # Example rotation angle in degrees
-translation_xy = (50, -30)  # Example translation (x, y)
+canvas_size = (960, 640)  # Example canvas size
+scale_factor = 1.05  # Example scaling factor
+rotation_angle = 0  # Example rotation angle in degrees
+translation_xy = (-20, 80)  # Example translation (x, y)
 
 # Perform transformations and get the final image and mask
 img_add, mask = create_canvas_and_transform_image(img_bgra, canvas_size, scale_factor, rotation_angle, translation_xy)
-img_background=add_pure_background(img_add)
+img_background = add_pure_background(img_add)
 
-cv2.imwrite(os.path.join(output_path, 'motor_mask.png'), mask.astype(np.uint8) * 255)
-cv2.imwrite(os.path.join(output_path, 'motor_canvas.png'), img_add)
-cv2.imwrite(os.path.join(output_path, 'motor_background.png'), img_background)
+cv2.imwrite(os.path.join(output_path, f'{img_name}_mask.png'), mask.astype(np.uint8) * 255)
+cv2.imwrite(os.path.join(output_path, f'{img_name}_canvas.png'), img_add)
+cv2.imwrite(os.path.join(output_path, f'{img_name}_background.png'), img_background)

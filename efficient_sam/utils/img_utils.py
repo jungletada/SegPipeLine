@@ -38,7 +38,7 @@ def save_transparent_img(sample_image_np, mask, save_path):
     cv2.imwrite(save_path, masked_image_np)
 
 
-def save_transparent_image_with_border(sample_image_np, mask, save_path):
+def save_crop_image_mask(sample_image_np, mask, save_path):
     # 保存为带有透明度的四通道BGRA格式：
     sample_image_np = sample_image_np.copy().astype(np.uint8)
     sample_image_np = cv2.cvtColor(sample_image_np, cv2.COLOR_RGB2BGRA)  # 转换为带有透明度的图像
