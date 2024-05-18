@@ -4,3 +4,5 @@
 __py
 **/__pycache__/
 weights
+figs/geo_outputs
+figs/outputs
