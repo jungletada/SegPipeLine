@@ -21,7 +21,7 @@ model = efficient_sam_model_registry[model_type]()
 example_img_path = 'figs/examples'
 output_img_path = 'figs/outputs'
 
-img_name = 'huili_shoes.png'
+img_name = 'swan.jpg'
 img_name_no_ext = re.sub(r'\.[^.]*$', '', img_name)
 
 sample_image_np = cv2.imread(osp.join(example_img_path, img_name))
@@ -51,7 +51,7 @@ def run_points_sample():
     plt.cla()
     
     #remu
-    input_points = torch.tensor([[[[400, 200], [400, 600]]]])
+    input_points = torch.tensor([[[[164, 365], [137, 326]]]])
     input_labels = torch.tensor([[[1, 1]]])
     
     plt.figure(figsize=(10,10))
